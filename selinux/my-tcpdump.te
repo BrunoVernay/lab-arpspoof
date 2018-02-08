@@ -1,0 +1,17 @@
+
+module my-tcpdump 1.0;
+
+require {
+	type container_t;
+	type kernel_t;
+	class packet_socket map;
+	class netlink_netfilter_socket create;
+	class system module_request;
+}
+
+#============= container_t ==============
+
+#!!!! This avc can be allowed using the boolean 'domain_kernel_load_modules'
+allow container_t kernel_t:system module_request;
+allow container_t self:netlink_netfilter_socket create;
+allow container_t self:packet_socket map;

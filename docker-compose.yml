@@ -1,0 +1,22 @@
+version: '3'
+services:
+    box1:
+        image: "busybox"
+        entrypoint: /bin/sh
+        stdin_open: true
+        tty: true
+    box2:
+        image: "busybox"
+        entrypoint: /bin/sh
+        stdin_open: true
+        tty: true
+    arpspoof:
+        build: 
+            context: arpspoof
+            args:
+                - http_proxy=${http_proxy}
+                - https_proxy=${https_proxy}
+        entrypoint: /bin/sh
+        stdin_open: true
+        tty: true
+
