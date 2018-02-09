@@ -27,9 +27,9 @@ gnome-terminal --title='ArpSpoofer' -- sudo docker run -it --rm --name arpspoofe
 gnome-terminal --title='TcpDumper'  -- sudo docker run -it --rm  --net=container:arpspoofer --name tcpdumper tcpdumper
 ```
 
-1 Check the IPs in Box1 and 2 `ip addr` 
-2 Watch the ARP table on Box1 `watch arp -na`
-3 Start pinging Box1 from Box2 `ping 172.17.0.x` (replace with Box1 IP)
+1. Check the IPs in Box1 and 2 `ip addr` 
+1. Watch the ARP table on Box1 `watch arp -na`
+1. Start pinging Box1 from Box2 `ping 172.17.0.x` (replace with Box1 IP)
 
 Usually we would spoof the gateway, but here we spoof both hosts. Since they are on the same LAN, they do not need the Gateway to communicate. (Replace IP with Box1 and 2!)
 `/usr/sbin/arpspoof -r -i eth0 -t 172.17.0.3 172.17.0.2`
