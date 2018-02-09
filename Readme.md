@@ -2,6 +2,10 @@
 
 Inspired from https://dockersec.blogspot.com/2017/01/arp-spoofing-docker-containers_26.html 
 
+We create:
+- Two "victim" boxes.
+- One "attacker" ArpSpoofer.
+- An optional "observer" TcpDumper that can be attached to different network interface.
 
 
 ## Buid
@@ -20,7 +24,7 @@ Launch 4 terms:
 gnome-terminal --title='Box1' -- sudo docker run -it --rm --name box1 busybox
 gnome-terminal --title='Box2' -- sudo docker run -it --rm --name box2 busybox
 gnome-terminal --title='ArpSpoofer' -- sudo docker run -it --rm --name arpspoofer arpspoof
-gnome-terminal --title='TcpDumper' -- sudo docker run -it --rm  --net=container:arpspoofer --name tcpdumper tcpdump
+gnome-terminal --title='TcpDumper'  -- sudo docker run -it --rm  --net=container:arpspoofer --name tcpdumper tcpdump
 ```
 
 Check the IPs in Box1 and 2 `ip addr`, then start pinging Box1 from Box2 `ping 172.17.0.x`
