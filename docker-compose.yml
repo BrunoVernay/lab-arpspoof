@@ -10,9 +10,9 @@ services:
         entrypoint: /bin/sh
         stdin_open: true
         tty: true
-    arpspoof:
+    arpspoofer:
         build: 
-            context: arpspoof
+            context: arpspoofer
             args:
                 - http_proxy=${http_proxy}
                 - https_proxy=${https_proxy}
