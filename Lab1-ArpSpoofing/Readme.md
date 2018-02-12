@@ -34,7 +34,7 @@ gnome-terminal --title='TcpDumper'  -- sudo docker run -it --rm  --net=container
 Usually we would spoof the gateway, but here we spoof both hosts. Since they are on the same LAN, they do not need the Gateway to communicate. (Replace IP with Box1 and 2!)
 `/usr/sbin/arpspoof -r -i eth0 -t 172.17.0.3 172.17.0.2`
 
-You should see the traffic in TcpDumper (note that the container can be attached to other boxe's network). You can also capture traffic from within the host on interface `Docker0` with Wireshark. 
+You should see the traffic in TcpDumper (note that the container can be attached to other boxe's network). You can also capture traffic from within the host on bridge `Docker0` with Wireshark. 
 
 ### SELinux and tcpdump
 
@@ -45,7 +45,7 @@ TcpDump might not work with SELinux enabled. But: TcpDump is optional (you can u
   
 Keep in mind that it is a very simple attack. We didn't do anything to be stealthy. 
 
-The capture file is `result.pcapng`. Capture was done on the host interface `Docker0`.
+The capture file is `result.pcapng`. Capture was done on the host's bridge `Docker0`.
 
 - Box1 has 172.17.0.2 02:42:ac:11:00:02
 - Box2 has 172.17.0.3 02:42:ac:11:00:03
@@ -111,4 +111,5 @@ Do not forget to eventually `sudo setenforce Enforcing` or remove the SELinux mo
 
 ## Todo
 
-Use hostnames `... run -h box1 ...` (might simplify terminal titles, and if there is a DNS would be even better) 
+- Use `export IP_BOX1=$(sudo docker inspect --format '{{.NetworkSettings.IPAddress}}' box1)` to get IP addresses, then use `sudo docker exec box2 sh -c "ping -c3 $IP_BOX1"`
+- Tried, does not set the Terminal title, hence is useless:  _Use hostnames `... run -h box1 ...` (might simplify terminal titles, and if there is a DNS would be even better)_
