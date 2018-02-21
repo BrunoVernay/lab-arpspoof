@@ -13,8 +13,12 @@ Uses tools like
 - Mininet ???
   - Still to be investiguated https://github.com/mininet/mininet/wiki/Mininet-VM-Images
 - VirtualBox
+- NetCat
 - dsniff, MITMProxy, 
 
+## Todo
+
+- Replace `arp` by `ip neigh`
 
 ## Other tools
 
@@ -29,7 +33,7 @@ Looks like NetKit used to have many labs and teaching material. But they seems t
 ### NetCat
 Playing with Netcat is fun.
 - run `nc -l -p 2000` in a busybox box1 and `nc $IP_BOX1 2000` in a box2. 
-- You could also expose the port 2000 to the host if running Docker with `-p 2000:2000/tcp`. From the host you can then `nc -6 localhost 2000`. You can see it is listening with `netstat -lnt` on the host.
+- You could also expose the port 2000 to the host if running Docker with `-p 2000:2000/tcp`. From the host you can then `nc -6 localhost 2000`. You can see it is listening with `ss -lnt` on the host.
 -
 -
 
