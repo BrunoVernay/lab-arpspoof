@@ -1,12 +1,11 @@
 # ARP Spoofing Lab in Docker
 
-Inspired from https://dockersec.blogspot.com/2017/01/arp-spoofing-docker-containers_26.html 
-
 We create:
 - Two "victim" boxes.
 - One "attacker" ArpSpoofer.
 - An optional "observer" TcpDumper that can be attached to different network interface.
 
+Inspired from https://dockersec.blogspot.com/2017/01/arp-spoofing-docker-containers_26.html 
 
 ## Buid
   
@@ -15,7 +14,7 @@ sudo docker build --tag=arpspoofer --build-arg http_proxy=$http_proxy --build-ar
 sudo docker build --tag=tcpdumper  --build-arg http_proxy=$http_proxy --build-arg https_proxy=$https_proxy tcpdumper
 ```
 
-I tried `docker-compose`, but to open terms, a simple script is easier.
+Note: I tried `docker-compose`, but to open terms, a simple script is easier.
 
 ## Run
  
@@ -113,3 +112,5 @@ Do not forget to eventually `sudo setenforce Enforcing` or remove the SELinux mo
 
 - Use `export IP_BOX1=$(sudo docker inspect --format '{{.NetworkSettings.IPAddress}}' box1)` to get IP addresses, then use `sudo docker exec box2 sh -c "ping -c3 $IP_BOX1"`
 - Tried, does not set the Terminal title, hence is useless:  _Use hostnames `... run -h box1 ...` (might simplify terminal titles, and if there is a DNS would be even better)_
+
+
