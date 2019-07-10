@@ -28,7 +28,7 @@ Uses tools like
 
 ### NetKit
 
-Looks like NetKit used to have many labs and teaching material. But they seems to be abandonned? Also the http://www.Kathara.org/ looked promising, but did not work (for me).
+Looks like NetKit used to have many labs and teaching material. But they seems to be abandoned? Also the http://www.Kathara.org/ looked promising, but did not work (for me).
 
 ### NetCat
 Playing with Netcat is fun.
