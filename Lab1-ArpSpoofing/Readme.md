@@ -1,21 +1,20 @@
 # ARP Spoofing Lab in Docker
 
-Inspired from https://dockersec.blogspot.com/2017/01/arp-spoofing-docker-containers_26.html 
-
 We create:
 - Two "victim" boxes.
 - One "attacker" ArpSpoofer.
 - An optional "observer" TcpDumper that can be attached to different network interface.
 
+Inspired from https://dockersec.blogspot.com/2017/01/arp-spoofing-docker-containers_26.html 
 
-## Buid
+## Build
   
 ```
 sudo docker build --tag=arpspoofer --build-arg http_proxy=$http_proxy --build-arg https_proxy=https_proxy  arpspoofer
 sudo docker build --tag=tcpdumper  --build-arg http_proxy=$http_proxy --build-arg https_proxy=$https_proxy tcpdumper
 ```
 
-I tried `docker-compose`, but to open terms, a simple script is easier.
+Note: I tried `docker-compose`, but to open terms, a simple script is easier.
 
 ## Run
  
@@ -28,11 +27,11 @@ gnome-terminal --title='TcpDumper'  -- sudo docker run -it --rm  --net=container
 ```
 
 1. Check the IPs in Box1 and 2 `ip addr` 
-1. Watch the ARP table on Box1 `watch arp -na`
+1. Watch the ARP table on Box1 `watch ip neigh`
 1. Start pinging Box1 from Box2 `ping 172.17.0.x` (replace with Box1 IP)
 
 Usually we would spoof the gateway, but here we spoof both hosts. Since they are on the same LAN, they do not need the Gateway to communicate. (Replace IP with Box1 and 2!)
-`/usr/sbin/arpspoof -r -i eth0 -t 172.17.0.3 172.17.0.2`
+`/usr/sbin/arpspoof -r -i eth0 -t 172.17.0.x 172.17.0.y`
 
 You should see the traffic in TcpDumper (note that the container can be attached to other boxe's network). You can also capture traffic from within the host on bridge `Docker0` with Wireshark. 
 
@@ -113,3 +112,5 @@ Do not forget to eventually `sudo setenforce Enforcing` or remove the SELinux mo
 
 - Use `export IP_BOX1=$(sudo docker inspect --format '{{.NetworkSettings.IPAddress}}' box1)` to get IP addresses, then use `sudo docker exec box2 sh -c "ping -c3 $IP_BOX1"`
 - Tried, does not set the Terminal title, hence is useless:  _Use hostnames `... run -h box1 ...` (might simplify terminal titles, and if there is a DNS would be even better)_
+
+
